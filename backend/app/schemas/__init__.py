@@ -1,7 +1,15 @@
-from .auth.auth import RegisterRequest, LoginRequest, UserResponse, Token, TokenData
+from .auth.auth import (
+    CitizenRegisterRequest, 
+    AdminRegisterRequest, 
+    LoginRequest, 
+    UserResponse, 
+    Token, 
+    TokenData
+)
 
 __all__ = [
-    "RegisterRequest",
+    "CitizenRegisterRequest",
+    "AdminRegisterRequest",
     "LoginRequest",
     "UserResponse",
     "Token",

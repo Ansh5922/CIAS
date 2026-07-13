@@ -7,6 +7,8 @@ class Settings(BaseSettings):
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 7 # 7 days
     GEMINI_API_KEY: str = ""
+    UPLOAD_DIR: str = "uploads"
+    ADMIN_REGISTRATION_SECRET: str = "default_secret_key_change_me"
 
     class Config:
         env_file = ".env"

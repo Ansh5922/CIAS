@@ -2,10 +2,18 @@ from pydantic import BaseModel, EmailStr
 from typing import Optional
 
 
-class RegisterRequest(BaseModel):
+class CitizenRegisterRequest(BaseModel):
     full_name: str
     email: EmailStr
     password: str
+    phone: Optional[str] = None
+
+
+class AdminRegisterRequest(BaseModel):
+    full_name: str
+    email: EmailStr
+    password: str
+    admin_registration_secret: str
     phone: Optional[str] = None
 
 
