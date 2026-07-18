@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 # Safely attempt to import OCRService. 
 # Depending on CIAS module structure, this provides strong typing while avoiding import crashes.
 try:
-    from app.preprocessing.ocr.service import OCRService
+    from app.preprocessing.ocr.ocr_service import OCRService
 except ImportError:
     # We will handle the fallback dynamically in __init__ if missing
     OCRService = None
