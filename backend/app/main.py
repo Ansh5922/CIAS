@@ -4,7 +4,7 @@ from sqlalchemy import text
 from contextlib import asynccontextmanager
 from app.core.database import engine
 from app.core.config import settings
-from app.api.routes import auth, upload
+from app.api.routes import auth, upload, preprocessing
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -23,12 +23,14 @@ app = FastAPI(
     lifespan=lifespan,
     openapi_tags=[
         {"name": "Auth", "description": "Authentication operations"},
-        {"name": "Upload", "description": "File upload operations"}
+        {"name": "Upload", "description": "File upload operations"},
+        {"name": "Preprocessing", "description": "Document parsing and ingestion pipeline"}
     ]
 )
 
 app.include_router(auth.router, prefix="/auth", tags=["Auth"])
 app.include_router(upload.router, prefix="/upload", tags=["Upload"])
+app.include_router(preprocessing.router, prefix="/preprocessing", tags=["Preprocessing"])
 
 
 @app.get("/")
@@ -38,23 +40,4 @@ def root():
 
 @app.get("/health")
 def health():
-    return {"status": "healthy"}
-
-
-@app.get("/db-test")
-def db_test():
-    try:
-        with engine.connect() as connection:
-            result = connection.execute(text("SELECT current_database();"))
-            db_name = result.scalar()
-
-        return {
-            "status": "connected",
-            "database": db_name
-        }
-
-    except Exception as e:
-        return {
-            "status": "failed",
-            "error": str(e)
-        }
+    return {"status": "healthy"}
